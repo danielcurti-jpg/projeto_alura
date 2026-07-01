@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Blog Tech</title>
+
     <style>
         * {
             margin: 0;
@@ -58,29 +59,80 @@
             width: 80px;
             height: 80px;
         }
+
+        /* BOTÃO DE LIKE */
+        .like-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #183C63;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Meu Blog Tech</h1>
         <p>Compartilhando conhecimentos sobre tecnologia e programação.</p>
     </header>
+
     <img src="imagen-blog.png" alt="Ilustração de um notebook exibindo código de programação, com uma janela de desenvolvimento e uma engrenagem ao fundo, representando tecnologia e programação.">
+
     <main>
         <article>
             <h2>Meu Primeiro Post</h2>
             <p class="autor">Por: Daniel Curti | 01/07/2026</p>
+
             <p>
                 Seja bem-vindo ao Meu Blog Tech! Aqui você encontrará conteúdos
                 sobre programação, desenvolvimento web, curiosidades sobre a área
-                da tecnologia e dicas para quem está começando nesse mundo. Meu
-                objetivo é aprender junto com você e compartilhar conhecimentos
-                de uma forma simples e prática.
+                da tecnologia e dicas para quem está começando nesse mundo.
             </p>
+
+            <!-- LIKE -->
+            <div class="like-container">
+                <button id="likeBtn" onclick="curtir()">Curtir 👍</button>
+                <span id="likeCount">0 curtidas</span>
+            </div>
         </article>
     </main>
+
     <footer>
         © 2026 - Meu Blog Tech
     </footer>
+
+    <script>
+        let likes = 0;
+
+        // verifica se já curtiu
+        if (localStorage.getItem("curtido") === "true") {
+            document.getElementById("likeBtn").disabled = true;
+        }
+
+        function curtir() {
+            if (localStorage.getItem("curtido") === "true") return;
+
+            likes++;
+            document.getElementById("likeCount").innerText = likes + " curtidas";
+
+            localStorage.setItem("curtido", "true");
+            document.getElementById("likeBtn").disabled = true;
+        }
+    </script>
+
 </body>
 </html>

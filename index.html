@@ -4,49 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Blog Tech</title>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             background-color: #f4f4f4;
             font-family: Arial, Helvetica, sans-serif;
             color: #333;
         }
+
         header {
             background-color: #183C63;
             color: white;
             text-align: center;
             padding: 30px;
         }
+
         header h1 {
             margin-bottom: 10px;
         }
+
+        .imagem-blog {
+            display: block;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin: 25px auto;
+            border-radius: 15px;
+        }
+
         main {
             width: 80%;
             max-width: 800px;
             margin: 30px auto;
         }
+
         article {
             background-color: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
         }
+
         article h2 {
             color: #183C63;
             margin-bottom: 10px;
         }
+
         .autor {
             color: gray;
             margin-bottom: 20px;
         }
+
         article p {
             line-height: 1.6;
             text-align: justify;
         }
+
+        .like-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .like-btn {
+            background-color: #183C63;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .like-btn:hover {
+            background-color: #24598d;
+            transform: scale(1.05);
+        }
+
+        .like-btn.curtido {
+            background-color: #e63946;
+        }
+
+        .like-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .like-count {
+            font-weight: bold;
+            color: #555;
+        }
+
         footer {
             background-color: #183C63;
             color: white;
@@ -54,33 +110,267 @@
             padding: 15px;
             margin-top: 40px;
         }
-        img{
-            width: 80px;
-            height: 80px;
-        }
     </style>
 </head>
+
 <body>
+
     <header>
         <h1>Meu Blog Tech</h1>
         <p>Compartilhando conhecimentos sobre tecnologia e programação.</p>
     </header>
-    <img src="imagen-blog.png" alt="Ilustração de um notebook exibindo código de programação, com uma janela de desenvolvimento e uma engrenagem ao fundo, representando tecnologia e programação.">
+
+    <img 
+        class="imagem-blog"
+        src="imagen-blog.png" 
+        alt="Ilustração de um notebook exibindo código de programação"
+    >
+
     <main>
+
+        <!-- POST 1 -->
         <article>
             <h2>Meu Primeiro Post</h2>
             <p class="autor">Por: Daniel Curti | 01/07/2026</p>
+
             <p>
                 Seja bem-vindo ao Meu Blog Tech! Aqui você encontrará conteúdos
                 sobre programação, desenvolvimento web, curiosidades sobre a área
-                da tecnologia e dicas para quem está começando nesse mundo. Meu
-                objetivo é aprender junto com você e compartilhar conhecimentos
-                de uma forma simples e prática.
+                da tecnologia e dicas para quem está começando nesse mundo.
             </p>
+
+            <div class="like-container">
+                <button class="like-btn" id="likeBtn1" onclick="curtir(1)">
+                    ❤️ Curtir
+                </button>
+
+                <span class="like-count" id="likeCount1">
+                    0 curtidas
+                </span>
+            </div>
         </article>
+
+
+        <!-- POST 2 -->
+        <article>
+            <h2>O que é Inteligência Artificial?</h2>
+            <p class="autor">Por: Daniel Curti | 05/07/2026</p>
+
+            <p>
+                A Inteligência Artificial é uma área da tecnologia que busca
+                desenvolver sistemas capazes de realizar tarefas que normalmente
+                exigiriam inteligência humana. Entre essas tarefas estão
+                reconhecimento de imagens, compreensão de textos, tradução,
+                análise de dados e tomada de decisões.
+            </p>
+
+            <p>
+                Atualmente, a inteligência artificial está presente em diversos
+                setores, como educação, saúde, empresas, programação e entretenimento.
+            </p>
+
+            <div class="like-container">
+                <button class="like-btn" id="likeBtn2" onclick="curtir(2)">
+                    ❤️ Curtir
+                </button>
+
+                <span class="like-count" id="likeCount2">
+                    0 curtidas
+                </span>
+            </div>
+        </article>
+
+
+        <!-- POST 3 -->
+        <article>
+            <h2>A importância da programação</h2>
+            <p class="autor">Por: Daniel Curti | 10/07/2026</p>
+
+            <p>
+                Aprender programação é uma excelente maneira de desenvolver
+                raciocínio lógico e criatividade. Com algumas linhas de código,
+                podemos criar sites, aplicativos, jogos e sistemas capazes de
+                resolver problemas do dia a dia.
+            </p>
+
+            <p>
+                Para quem está começando, linguagens como HTML, CSS e JavaScript
+                são ótimas opções para entrar no mundo do desenvolvimento web.
+            </p>
+
+            <div class="like-container">
+                <button class="like-btn" id="likeBtn3" onclick="curtir(3)">
+                    ❤️ Curtir
+                </button>
+
+                <span class="like-count" id="likeCount3">
+                    0 curtidas
+                </span>
+            </div>
+        </article>
+
+
+        <!-- POST 4 -->
+        <article>
+            <h2>O que é computação em nuvem?</h2>
+            <p class="autor">Por: Daniel Curti | 15/07/2026</p>
+
+            <p>
+                A computação em nuvem permite armazenar arquivos, executar
+                aplicações e utilizar recursos de computadores através da
+                internet, sem depender exclusivamente do computador local.
+            </p>
+
+            <p>
+                Serviços em nuvem são utilizados diariamente para armazenar
+                fotos, documentos, fazer backups e executar sistemas empresariais.
+                Essa tecnologia também é muito importante para empresas que
+                precisam aumentar ou diminuir seus recursos rapidamente.
+            </p>
+
+            <div class="like-container">
+                <button class="like-btn" id="likeBtn4" onclick="curtir(4)">
+                    ❤️ Curtir
+                </button>
+
+                <span class="like-count" id="likeCount4">
+                    0 curtidas
+                </span>
+            </div>
+        </article>
+
+
+        <!-- POST 5 -->
+        <article>
+            <h2>Por que a segurança digital é importante?</h2>
+            <p class="autor">Por: Daniel Curti | 20/07/2026</p>
+
+            <p>
+                Com o crescimento do uso da internet, proteger informações
+                pessoais e profissionais se tornou cada vez mais importante.
+                Senhas fortes, autenticação em dois fatores e atualizações
+                frequentes são algumas medidas que ajudam a aumentar a segurança.
+            </p>
+
+            <p>
+                Também é importante ter cuidado com links desconhecidos,
+                mensagens suspeitas e arquivos recebidos de fontes não confiáveis.
+            </p>
+
+            <div class="like-container">
+                <button class="like-btn" id="likeBtn5" onclick="curtir(5)">
+                    ❤️ Curtir
+                </button>
+
+                <span class="like-count" id="likeCount5">
+                    0 curtidas
+                </span>
+            </div>
+        </article>
+
+
+        <!-- POST 6 -->
+        <article>
+            <h2>O futuro da tecnologia</h2>
+            <p class="autor">Por: Daniel Curti | 25/07/2026</p>
+
+            <p>
+                A tecnologia está evoluindo rapidamente e novas ferramentas
+                surgem todos os dias. Inteligência artificial, robótica,
+                computação em nuvem e novas formas de interação digital estão
+                transformando a maneira como trabalhamos e aprendemos.
+            </p>
+
+            <p>
+                Para acompanhar essas mudanças, é importante manter uma rotina
+                de estudos e estar sempre disposto a aprender novas tecnologias.
+            </p>
+
+            <div class="like-container">
+                <button class="like-btn" id="likeBtn6" onclick="curtir(6)">
+                    ❤️ Curtir
+                </button>
+
+                <span class="like-count" id="likeCount6">
+                    0 curtidas
+                </span>
+            </div>
+        </article>
+
     </main>
+
     <footer>
         © 2026 - Meu Blog Tech
     </footer>
+
+
+    <script>
+        // Carrega os likes salvos no navegador
+        function carregarLikes() {
+
+            for (let i = 1; i <= 6; i++) {
+
+                let likes = localStorage.getItem("likesPost" + i);
+
+                if (likes === null) {
+                    likes = 0;
+                }
+
+                document.getElementById("likeCount" + i).innerText =
+                    likes + (likes == 1 ? " curtida" : " curtidas");
+
+
+                // Verifica se o usuário já curtiu esse post
+                if (localStorage.getItem("curtidoPost" + i) === "true") {
+
+                    let botao = document.getElementById("likeBtn" + i);
+
+                    botao.disabled = true;
+                    botao.classList.add("curtido");
+                    botao.innerText = "❤️ Curtido";
+                }
+            }
+        }
+
+
+        // Função para curtir um post
+        function curtir(post) {
+
+            // Impede curtir novamente
+            if (localStorage.getItem("curtidoPost" + post) === "true") {
+                return;
+            }
+
+            let likes = localStorage.getItem("likesPost" + post);
+
+            if (likes === null) {
+                likes = 0;
+            }
+
+            likes = Number(likes) + 1;
+
+            // Salva quantidade de curtidas
+            localStorage.setItem("likesPost" + post, likes);
+
+            // Salva que o usuário já curtiu
+            localStorage.setItem("curtidoPost" + post, "true");
+
+            // Atualiza contador
+            document.getElementById("likeCount" + post).innerText =
+                likes + (likes == 1 ? " curtida" : " curtidas");
+
+            // Atualiza botão
+            let botao = document.getElementById("likeBtn" + post);
+
+            botao.disabled = true;
+            botao.classList.add("curtido");
+            botao.innerText = "❤️ Curtido";
+        }
+
+
+        // Executa ao abrir a página
+        carregarLikes();
+    </script>
+
 </body>
 </html>

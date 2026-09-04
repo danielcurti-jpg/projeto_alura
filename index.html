@@ -1,48 +1,118 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Meu Blog Tech</title>
 
     <style>
+
+        /* =========================
+           CONFIGURAÇÕES GERAIS
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f4f4f4;
+            background: #f4f6f8;
             font-family: Arial, Helvetica, sans-serif;
             color: #333;
-            transition: background-color 0.3s, color 0.3s;
+            transition: 0.3s;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           BARRA DE PROGRESSO
+        ========================= */
+
+        #barraProgresso {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: #4da3ff;
+            z-index: 9999;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
         header {
-            background-color: #183C63;
+            background: linear-gradient(135deg, #183C63, #24598d);
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 45px 20px;
         }
 
         header h1 {
+            font-size: 42px;
             margin-bottom: 10px;
         }
 
-        /* BOTÃO DO MODO ESCURO */
-        .dark-mode-container {
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+
+        /* =========================
+           MENU
+        ========================= */
+
+        nav {
+            background: #102b47;
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            align-items: center;
+            gap: 25px;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #62b0ff;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           BOTÃO MODO ESCURO
+        ========================= */
+
+        .dark-mode-container {
+            margin-top: 25px;
         }
 
         .dark-mode-btn {
-            background-color: white;
+            background: white;
             color: #183C63;
             border: none;
-            padding: 10px 18px;
-            border-radius: 20px;
+            padding: 11px 20px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 15px;
             font-weight: bold;
@@ -53,74 +123,177 @@
             transform: scale(1.05);
         }
 
+
+        /* =========================
+           IMAGEM
+        ========================= */
+
         .imagem-blog {
             display: block;
             width: 150px;
             height: 150px;
             object-fit: cover;
-            margin: 25px auto;
-            border-radius: 15px;
+            margin: 30px auto;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         }
 
+
+        /* =========================
+           ÁREA PRINCIPAL
+        ========================= */
+
         main {
-            width: 80%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 900px;
             margin: 30px auto;
         }
 
-        article {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+
+        /* =========================
+           PESQUISA
+        ========================= */
+
+        .pesquisa-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 30px;
-            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .pesquisa {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .pesquisa:focus {
+            border-color: #24598d;
+        }
+
+        #resultadoPesquisa {
+            display: block;
+            margin-top: 10px;
+            color: #666;
+        }
+
+
+        /* =========================
+           POSTS
+        ========================= */
+
+        article {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            animation: aparecer 0.7s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.14);
         }
 
         article h2 {
             color: #183C63;
+            font-size: 27px;
             margin-bottom: 10px;
         }
 
         .autor {
-            color: gray;
-            margin-bottom: 20px;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 18px;
         }
 
         article p {
-            line-height: 1.6;
+            line-height: 1.7;
             text-align: justify;
+            margin-bottom: 15px;
         }
 
-        .like-container {
-            margin-top: 20px;
+
+        /* =========================
+           CATEGORIA
+        ========================= */
+
+        .categoria {
+            display: inline-block;
+            background: #e5f1ff;
+            color: #183C63;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           TEMPO DE LEITURA
+        ========================= */
+
+        .tempo-leitura {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           BOTÕES DOS POSTS
+        ========================= */
+
+        .acoes {
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
-        .like-btn {
-            background-color: #183C63;
-            color: white;
+        .like-btn,
+        .compartilhar-btn {
             border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
+            padding: 11px 17px;
+            border-radius: 9px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: bold;
             transition: 0.3s;
         }
 
-        .like-btn:hover {
-            background-color: #24598d;
-            transform: scale(1.05);
+        .like-btn {
+            background: #183C63;
+            color: white;
+        }
+
+        .compartilhar-btn {
+            background: #e9eef3;
+            color: #183C63;
+        }
+
+        .like-btn:hover,
+        .compartilhar-btn:hover {
+            transform: translateY(-2px);
         }
 
         .like-btn.curtido {
-            background-color: #e63946;
+            background: #e63946;
         }
 
         .like-btn:disabled {
             cursor: not-allowed;
+            opacity: 0.9;
         }
 
         .like-count {
@@ -128,377 +301,1065 @@
             color: #555;
         }
 
+
+        /* =========================
+           VOLTAR AO TOPO
+        ========================= */
+
+        #topoBtn {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: #183C63;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #topoBtn:hover {
+            transform: scale(1.1);
+        }
+
+
+        /* =========================
+           MENSAGEM
+        ========================= */
+
+        #mensagem {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #183C63;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
         footer {
-            background-color: #183C63;
+            background: #183C63;
             color: white;
             text-align: center;
-            padding: 15px;
-            margin-top: 40px;
+            padding: 25px;
+            margin-top: 50px;
         }
 
 
-        /* ================================= */
-        /*          MODO ESCURO               */
-        /* ================================= */
+        /* =========================
+           MODO ESCURO
+        ========================= */
 
         body.dark-mode {
-            background-color: #121212;
-            color: #eaeaea;
+            background: #101820;
+            color: #e8e8e8;
         }
 
-        body.dark-mode article {
-            background-color: #1e1e1e;
-            color: #eaeaea;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        body.dark-mode nav {
+            background: #081522;
+        }
+
+        body.dark-mode article,
+        body.dark-mode .pesquisa-container {
+            background: #1b2630;
+            color: #e8e8e8;
         }
 
         body.dark-mode article h2 {
-            color: #5da9e9;
+            color: #63b3ff;
         }
 
-        body.dark-mode .autor {
+        body.dark-mode .autor,
+        body.dark-mode .tempo-leitura {
             color: #aaa;
         }
 
         body.dark-mode .like-count {
-            color: #ccc;
+            color: #ddd;
         }
 
-        body.dark-mode .dark-mode-btn {
-            background-color: #333;
+        body.dark-mode .categoria {
+            background: #263e52;
+            color: #72b9ff;
+        }
+
+        body.dark-mode .compartilhar-btn {
+            background: #26343f;
             color: white;
         }
 
-        body.dark-mode header,
-        body.dark-mode footer {
-            background-color: #0d243b;
+        body.dark-mode .pesquisa {
+            background: #26343f;
+            color: white;
+            border-color: #40515f;
         }
+
+        body.dark-mode .dark-mode-btn {
+            background: #26343f;
+            color: white;
+        }
+
+        body.dark-mode header {
+            background: linear-gradient(135deg, #0b2035, #123b5f);
+        }
+
+        body.dark-mode footer {
+            background: #081522;
+        }
+
+
+        /* =========================
+           ANIMAÇÃO
+        ========================= */
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 32px;
+            }
+
+            header p {
+                font-size: 15px;
+            }
+
+            nav {
+                gap: 12px;
+                font-size: 13px;
+            }
+
+            main {
+                width: 94%;
+            }
+
+            article {
+                padding: 22px;
+            }
+
+            article h2 {
+                font-size: 23px;
+            }
+
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <header>
-        <h1>Meu Blog Tech</h1>
-        <p>Compartilhando conhecimentos sobre tecnologia e programação.</p>
+    <!-- BARRA DE PROGRESSO -->
+    <div id="barraProgresso"></div>
+
+
+    <!-- CABEÇALHO -->
+
+    <header id="inicio">
+
+        <h1>💻 Meu Blog Tech</h1>
+
+        <p>
+            Compartilhando conhecimentos sobre tecnologia e programação.
+        </p>
 
         <div class="dark-mode-container">
-            <button class="dark-mode-btn" id="darkModeBtn" onclick="alternarModo()">
+
+            <button
+                class="dark-mode-btn"
+                id="darkModeBtn"
+                onclick="alternarModo()">
+
                 🌙 Modo escuro
+
             </button>
+
         </div>
+
     </header>
 
 
-    <img 
+    <!-- MENU -->
+
+    <nav>
+
+        <a href="#inicio">🏠 Início</a>
+
+        <a href="#posts">📚 Posts</a>
+
+        <a href="#sobre">👨‍💻 Sobre</a>
+
+    </nav>
+
+
+    <!-- IMAGEM -->
+
+    <img
         class="imagem-blog"
-        src="imagen-blog.png" 
+        src="imagen-blog.png"
         alt="Ilustração de um notebook exibindo código de programação"
     >
 
 
-    <main>
+    <main id="posts">
+
+
+        <!-- PESQUISA -->
+
+        <div class="pesquisa-container">
+
+            <input
+                type="text"
+                id="campoPesquisa"
+                class="pesquisa"
+                placeholder="🔎 Pesquisar no blog..."
+                onkeyup="pesquisarPosts()"
+            >
+
+            <span id="resultadoPesquisa">
+                6 posts encontrados
+            </span>
+
+        </div>
+
 
         <!-- POST 1 -->
-        <article>
-            <h2>Meu Primeiro Post</h2>
-            <p class="autor">Por: Daniel Curti | 01/07/2026</p>
 
-            <p>
-                Seja bem-vindo ao Meu Blog Tech! Aqui você encontrará conteúdos
-                sobre programação, desenvolvimento web, curiosidades sobre a área
-                da tecnologia e dicas para quem está começando nesse mundo.
+        <article>
+
+            <span class="categoria">
+                💻 Programação
+            </span>
+
+            <h2>Meu Primeiro Post</h2>
+
+            <p class="autor">
+                Por: Daniel Curti | 01/07/2026
             </p>
 
-            <div class="like-container">
-                <button class="like-btn" id="likeBtn1" onclick="curtir(1)">
+            <p class="tempo-leitura">
+                📖 1 minuto de leitura
+            </p>
+
+            <p>
+                Seja bem-vindo ao Meu Blog Tech! Aqui você encontrará
+                conteúdos sobre programação, desenvolvimento web,
+                curiosidades sobre a área da tecnologia e dicas para
+                quem está começando nesse mundo.
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="like-btn"
+                    id="likeBtn1"
+                    onclick="curtir(1)">
+
                     ❤️ Curtir
+
                 </button>
 
-                <span class="like-count" id="likeCount1">
+                <span
+                    class="like-count"
+                    id="likeCount1">
+
                     0 curtidas
+
                 </span>
+
+                <button
+                    class="compartilhar-btn"
+                    onclick="compartilhar('Meu Primeiro Post')">
+
+                    🔗 Compartilhar
+
+                </button>
+
             </div>
+
         </article>
 
 
         <!-- POST 2 -->
+
         <article>
+
+            <span class="categoria">
+                🤖 Inteligência Artificial
+            </span>
+
             <h2>O que é Inteligência Artificial?</h2>
-            <p class="autor">Por: Daniel Curti | 05/07/2026</p>
 
-            <p>
-                A Inteligência Artificial é uma área da tecnologia que busca
-                desenvolver sistemas capazes de realizar tarefas que normalmente
-                exigiriam inteligência humana. Entre essas tarefas estão
-                reconhecimento de imagens, compreensão de textos, tradução,
-                análise de dados e tomada de decisões.
+            <p class="autor">
+                Por: Daniel Curti | 05/07/2026
+            </p>
+
+            <p class="tempo-leitura">
+                📖 2 minutos de leitura
             </p>
 
             <p>
-                Atualmente, a inteligência artificial está presente em diversos
-                setores, como educação, saúde, empresas, programação e entretenimento.
+                A Inteligência Artificial é uma área da tecnologia
+                que busca desenvolver sistemas capazes de realizar
+                tarefas que normalmente exigiriam inteligência humana.
+                Entre essas tarefas estão reconhecimento de imagens,
+                compreensão de textos, tradução, análise de dados e
+                tomada de decisões.
             </p>
 
-            <div class="like-container">
-                <button class="like-btn" id="likeBtn2" onclick="curtir(2)">
+            <p>
+                Atualmente, a inteligência artificial está presente
+                em diversos setores, como educação, saúde, empresas,
+                programação e entretenimento.
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="like-btn"
+                    id="likeBtn2"
+                    onclick="curtir(2)">
+
                     ❤️ Curtir
+
                 </button>
 
-                <span class="like-count" id="likeCount2">
+                <span
+                    class="like-count"
+                    id="likeCount2">
+
                     0 curtidas
+
                 </span>
+
+                <button
+                    class="compartilhar-btn"
+                    onclick="compartilhar('O que é Inteligência Artificial?')">
+
+                    🔗 Compartilhar
+
+                </button>
+
             </div>
+
         </article>
 
 
         <!-- POST 3 -->
+
         <article>
+
+            <span class="categoria">
+                👨‍💻 Desenvolvimento
+            </span>
+
             <h2>A importância da programação</h2>
-            <p class="autor">Por: Daniel Curti | 10/07/2026</p>
 
-            <p>
-                Aprender programação é uma excelente maneira de desenvolver
-                raciocínio lógico e criatividade. Com algumas linhas de código,
-                podemos criar sites, aplicativos, jogos e sistemas capazes de
-                resolver problemas do dia a dia.
+            <p class="autor">
+                Por: Daniel Curti | 10/07/2026
+            </p>
+
+            <p class="tempo-leitura">
+                📖 2 minutos de leitura
             </p>
 
             <p>
-                Para quem está começando, linguagens como HTML, CSS e JavaScript
-                são ótimas opções para entrar no mundo do desenvolvimento web.
+                Aprender programação é uma excelente maneira de
+                desenvolver raciocínio lógico e criatividade.
+                Com algumas linhas de código, podemos criar sites,
+                aplicativos, jogos e sistemas capazes de resolver
+                problemas do dia a dia.
             </p>
 
-            <div class="like-container">
-                <button class="like-btn" id="likeBtn3" onclick="curtir(3)">
+            <p>
+                Para quem está começando, linguagens como HTML,
+                CSS e JavaScript são ótimas opções para entrar no
+                mundo do desenvolvimento web.
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="like-btn"
+                    id="likeBtn3"
+                    onclick="curtir(3)">
+
                     ❤️ Curtir
+
                 </button>
 
-                <span class="like-count" id="likeCount3">
+                <span
+                    class="like-count"
+                    id="likeCount3">
+
                     0 curtidas
+
                 </span>
+
+                <button
+                    class="compartilhar-btn"
+                    onclick="compartilhar('A importância da programação')">
+
+                    🔗 Compartilhar
+
+                </button>
+
             </div>
+
         </article>
 
 
         <!-- POST 4 -->
+
         <article>
+
+            <span class="categoria">
+                ☁️ Tecnologia
+            </span>
+
             <h2>O que é computação em nuvem?</h2>
-            <p class="autor">Por: Daniel Curti | 15/07/2026</p>
 
-            <p>
-                A computação em nuvem permite armazenar arquivos, executar
-                aplicações e utilizar recursos de computadores através da
-                internet, sem depender exclusivamente do computador local.
+            <p class="autor">
+                Por: Daniel Curti | 15/07/2026
+            </p>
+
+            <p class="tempo-leitura">
+                📖 2 minutos de leitura
             </p>
 
             <p>
-                Serviços em nuvem são utilizados diariamente para armazenar
-                fotos, documentos, fazer backups e executar sistemas empresariais.
-                Essa tecnologia também é muito importante para empresas que
-                precisam aumentar ou diminuir seus recursos rapidamente.
+                A computação em nuvem permite armazenar arquivos,
+                executar aplicações e utilizar recursos de computadores
+                através da internet, sem depender exclusivamente do
+                computador local.
             </p>
 
-            <div class="like-container">
-                <button class="like-btn" id="likeBtn4" onclick="curtir(4)">
+            <p>
+                Serviços em nuvem são utilizados diariamente para
+                armazenar fotos, documentos, fazer backups e executar
+                sistemas empresariais.
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="like-btn"
+                    id="likeBtn4"
+                    onclick="curtir(4)">
+
                     ❤️ Curtir
+
                 </button>
 
-                <span class="like-count" id="likeCount4">
+                <span
+                    class="like-count"
+                    id="likeCount4">
+
                     0 curtidas
+
                 </span>
+
+                <button
+                    class="compartilhar-btn"
+                    onclick="compartilhar('O que é computação em nuvem?')">
+
+                    🔗 Compartilhar
+
+                </button>
+
             </div>
+
         </article>
 
 
         <!-- POST 5 -->
+
         <article>
+
+            <span class="categoria">
+                🔐 Segurança
+            </span>
+
             <h2>Por que a segurança digital é importante?</h2>
-            <p class="autor">Por: Daniel Curti | 20/07/2026</p>
 
-            <p>
-                Com o crescimento do uso da internet, proteger informações
-                pessoais e profissionais se tornou cada vez mais importante.
-                Senhas fortes, autenticação em dois fatores e atualizações
-                frequentes são algumas medidas que ajudam a aumentar a segurança.
+            <p class="autor">
+                Por: Daniel Curti | 20/07/2026
+            </p>
+
+            <p class="tempo-leitura">
+                📖 2 minutos de leitura
             </p>
 
             <p>
-                Também é importante ter cuidado com links desconhecidos,
-                mensagens suspeitas e arquivos recebidos de fontes não confiáveis.
+                Com o crescimento do uso da internet, proteger
+                informações pessoais e profissionais se tornou
+                cada vez mais importante.
             </p>
 
-            <div class="like-container">
-                <button class="like-btn" id="likeBtn5" onclick="curtir(5)">
+            <p>
+                Senhas fortes, autenticação em dois fatores e
+                atualizações frequentes são algumas medidas que
+                ajudam a aumentar a segurança.
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="like-btn"
+                    id="likeBtn5"
+                    onclick="curtir(5)">
+
                     ❤️ Curtir
+
                 </button>
 
-                <span class="like-count" id="likeCount5">
+                <span
+                    class="like-count"
+                    id="likeCount5">
+
                     0 curtidas
+
                 </span>
+
+                <button
+                    class="compartilhar-btn"
+                    onclick="compartilhar('Por que a segurança digital é importante?')">
+
+                    🔗 Compartilhar
+
+                </button>
+
             </div>
+
         </article>
 
 
         <!-- POST 6 -->
+
         <article>
+
+            <span class="categoria">
+                🚀 Futuro
+            </span>
+
             <h2>O futuro da tecnologia</h2>
-            <p class="autor">Por: Daniel Curti | 25/07/2026</p>
 
-            <p>
-                A tecnologia está evoluindo rapidamente e novas ferramentas
-                surgem todos os dias. Inteligência artificial, robótica,
-                computação em nuvem e novas formas de interação digital estão
-                transformando a maneira como trabalhamos e aprendemos.
+            <p class="autor">
+                Por: Daniel Curti | 25/07/2026
+            </p>
+
+            <p class="tempo-leitura">
+                📖 2 minutos de leitura
             </p>
 
             <p>
-                Para acompanhar essas mudanças, é importante manter uma rotina
-                de estudos e estar sempre disposto a aprender novas tecnologias.
+                A tecnologia está evoluindo rapidamente e novas
+                ferramentas surgem todos os dias. Inteligência
+                artificial, robótica, computação em nuvem e novas
+                formas de interação digital estão transformando
+                a maneira como trabalhamos e aprendemos.
             </p>
 
-            <div class="like-container">
-                <button class="like-btn" id="likeBtn6" onclick="curtir(6)">
+            <p>
+                Para acompanhar essas mudanças, é importante manter
+                uma rotina de estudos e estar sempre disposto a
+                aprender novas tecnologias.
+            </p>
+
+            <div class="acoes">
+
+                <button
+                    class="like-btn"
+                    id="likeBtn6"
+                    onclick="curtir(6)">
+
                     ❤️ Curtir
+
                 </button>
 
-                <span class="like-count" id="likeCount6">
+                <span
+                    class="like-count"
+                    id="likeCount6">
+
                     0 curtidas
+
                 </span>
+
+                <button
+                    class="compartilhar-btn"
+                    onclick="compartilhar('O futuro da tecnologia')">
+
+                    🔗 Compartilhar
+
+                </button>
+
             </div>
+
         </article>
+
+
+        <!-- SOBRE -->
+
+        <article id="sobre">
+
+            <span class="categoria">
+                👨‍💻 Sobre o blog
+            </span>
+
+            <h2>Sobre o Meu Blog Tech</h2>
+
+            <p>
+                Este blog foi criado para compartilhar informações
+                sobre tecnologia, programação e assuntos relacionados
+                ao mundo digital.
+            </p>
+
+            <p>
+                A ideia é apresentar conteúdos de maneira simples
+                para ajudar quem está começando a aprender tecnologia.
+            </p>
+
+        </article>
+
 
     </main>
 
 
+    <!-- BOTÃO VOLTAR AO TOPO -->
+
+    <button
+        id="topoBtn"
+        onclick="voltarAoTopo()">
+
+        ↑
+
+    </button>
+
+
+    <!-- MENSAGEM -->
+
+    <div id="mensagem"></div>
+
+
+    <!-- RODAPÉ -->
+
     <footer>
-        © 2026 - Meu Blog Tech
+
+        <p>
+            © 2026 - Meu Blog Tech
+        </p>
+
+        <p>
+            Feito com HTML, CSS e JavaScript 💻
+        </p>
+
     </footer>
 
 
     <script>
 
-        // =================================
-        //          SISTEMA DE LIKES
-        // =================================
+
+        /* =========================
+           SISTEMA DE LIKES
+        ========================= */
 
         function carregarLikes() {
 
             for (let i = 1; i <= 6; i++) {
 
-                let likes = localStorage.getItem("likesPost" + i);
+                let likes =
+                    localStorage.getItem("likesPost" + i);
 
                 if (likes === null) {
                     likes = 0;
                 }
 
                 document.getElementById("likeCount" + i).innerText =
-                    likes + (likes == 1 ? " curtida" : " curtidas");
+                    likes +
+                    (likes == 1 ? " curtida" : " curtidas");
 
 
-                // Verifica se o usuário já curtiu esse post
-                if (localStorage.getItem("curtidoPost" + i) === "true") {
+                if (
+                    localStorage.getItem(
+                        "curtidoPost" + i
+                    ) === "true"
+                ) {
 
-                    let botao = document.getElementById("likeBtn" + i);
+                    let botao =
+                        document.getElementById(
+                            "likeBtn" + i
+                        );
 
                     botao.disabled = true;
+
                     botao.classList.add("curtido");
+
                     botao.innerText = "❤️ Curtido";
+
                 }
+
             }
+
         }
 
 
         function curtir(post) {
 
-            // Impede curtir novamente
-            if (localStorage.getItem("curtidoPost" + post) === "true") {
+            if (
+                localStorage.getItem(
+                    "curtidoPost" + post
+                ) === "true"
+            ) {
+
                 return;
+
             }
 
-            let likes = localStorage.getItem("likesPost" + post);
+
+            let likes =
+                localStorage.getItem(
+                    "likesPost" + post
+                );
 
             if (likes === null) {
                 likes = 0;
             }
 
+
             likes = Number(likes) + 1;
 
-            // Salva quantidade de curtidas
-            localStorage.setItem("likesPost" + post, likes);
 
-            // Salva que o usuário já curtiu
-            localStorage.setItem("curtidoPost" + post, "true");
+            localStorage.setItem(
+                "likesPost" + post,
+                likes
+            );
 
-            // Atualiza contador
-            document.getElementById("likeCount" + post).innerText =
-                likes + (likes == 1 ? " curtida" : " curtidas");
 
-            // Atualiza botão
-            let botao = document.getElementById("likeBtn" + post);
+            localStorage.setItem(
+                "curtidoPost" + post,
+                "true"
+            );
+
+
+            document.getElementById(
+                "likeCount" + post
+            ).innerText =
+                likes +
+                (likes == 1 ? " curtida" : " curtidas");
+
+
+            let botao =
+                document.getElementById(
+                    "likeBtn" + post
+                );
+
 
             botao.disabled = true;
+
             botao.classList.add("curtido");
+
             botao.innerText = "❤️ Curtido";
+
+
+            mostrarMensagem("❤️ Post curtido!");
+
         }
 
 
-        // =================================
-        //          MODO ESCURO
-        // =================================
+        /* =========================
+           MODO ESCURO
+        ========================= */
 
         function alternarModo() {
 
-            // Adiciona ou remove a classe dark-mode
-            document.body.classList.toggle("dark-mode");
+            document.body.classList.toggle(
+                "dark-mode"
+            );
 
-            // Verifica se o modo escuro está ativado
+
             let modoEscuro =
-                document.body.classList.contains("dark-mode");
+                document.body.classList.contains(
+                    "dark-mode"
+                );
 
-            let botao = document.getElementById("darkModeBtn");
+
+            let botao =
+                document.getElementById(
+                    "darkModeBtn"
+                );
+
 
             if (modoEscuro) {
 
-                botao.innerText = "☀️ Modo claro";
+                botao.innerText =
+                    "☀️ Modo claro";
 
-                // Salva preferência
-                localStorage.setItem("modoEscuro", "true");
+                localStorage.setItem(
+                    "modoEscuro",
+                    "true"
+                );
 
             } else {
 
-                botao.innerText = "🌙 Modo escuro";
+                botao.innerText =
+                    "🌙 Modo escuro";
 
-                // Salva preferência
-                localStorage.setItem("modoEscuro", "false");
+                localStorage.setItem(
+                    "modoEscuro",
+                    "false"
+                );
+
             }
+
         }
 
-
-        // =================================
-        //     CARREGA PREFERÊNCIAS
-        // =================================
 
         function carregarModo() {
 
-            let modoEscuro =
-                localStorage.getItem("modoEscuro");
+            if (
+                localStorage.getItem(
+                    "modoEscuro"
+                ) === "true"
+            ) {
 
-            if (modoEscuro === "true") {
+                document.body.classList.add(
+                    "dark-mode"
+                );
 
-                document.body.classList.add("dark-mode");
-
-                document.getElementById("darkModeBtn").innerText =
+                document.getElementById(
+                    "darkModeBtn"
+                ).innerText =
                     "☀️ Modo claro";
+
             }
+
         }
 
 
-        // Executa ao abrir a página
+        /* =========================
+           PESQUISA
+        ========================= */
+
+        function pesquisarPosts() {
+
+            let pesquisa =
+                document.getElementById(
+                    "campoPesquisa"
+                ).value.toLowerCase();
+
+
+            let posts =
+                document.querySelectorAll(
+                    "main article"
+                );
+
+
+            let encontrados = 0;
+
+
+            posts.forEach(function(post) {
+
+                let texto =
+                    post.innerText.toLowerCase();
+
+
+                if (
+                    texto.includes(pesquisa)
+                ) {
+
+                    post.style.display = "block";
+
+                    encontrados++;
+
+                } else {
+
+                    post.style.display = "none";
+
+                }
+
+            });
+
+
+            document.getElementById(
+                "resultadoPesquisa"
+            ).innerText =
+                encontrados +
+                (encontrados === 1
+                    ? " post encontrado"
+                    : " posts encontrados");
+
+        }
+
+
+        /* =========================
+           COMPARTILHAR
+        ========================= */
+
+        function compartilhar(titulo) {
+
+            let texto =
+                titulo +
+                " - Meu Blog Tech";
+
+
+            if (
+                navigator.share
+            ) {
+
+                navigator.share({
+
+                    title: titulo,
+
+                    text: texto,
+
+                    url: window.location.href
+
+                });
+
+            } else {
+
+                navigator.clipboard.writeText(
+                    window.location.href
+                );
+
+                mostrarMensagem(
+                    "🔗 Link copiado!"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           MENSAGEM
+        ========================= */
+
+        function mostrarMensagem(texto) {
+
+            let mensagem =
+                document.getElementById(
+                    "mensagem"
+                );
+
+
+            mensagem.innerText = texto;
+
+            mensagem.style.display = "block";
+
+
+            setTimeout(function() {
+
+                mensagem.style.display = "none";
+
+            }, 2500);
+
+        }
+
+
+        /* =========================
+           BARRA DE PROGRESSO
+        ========================= */
+
+        window.addEventListener(
+            "scroll",
+            function() {
+
+                let altura =
+                    document.documentElement.scrollHeight -
+                    document.documentElement.clientHeight;
+
+
+                let progresso =
+                    (window.scrollY / altura) * 100;
+
+
+                document.getElementById(
+                    "barraProgresso"
+                ).style.width =
+                    progresso + "%";
+
+
+                /* BOTÃO TOPO */
+
+                if (window.scrollY > 400) {
+
+                    document.getElementById(
+                        "topoBtn"
+                    ).style.display = "block";
+
+                } else {
+
+                    document.getElementById(
+                        "topoBtn"
+                    ).style.display = "none";
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           VOLTAR AO TOPO
+        ========================= */
+
+        function voltarAoTopo() {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+        /* =========================
+           INICIAR SITE
+        ========================= */
+
         carregarLikes();
+
         carregarModo();
+
 
     </script>
 
 </body>
+
 </html>
+```
